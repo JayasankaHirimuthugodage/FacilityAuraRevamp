@@ -14,6 +14,7 @@ import EnergyRoutes from './routes/EnergyRoutes.js';
 import CategoryLimitRoutes from './routes/CategoryLimitRoutes.js';
 import UserManagementRoutes from './controllers/UserController.js';
 import User from './models/UserModel.js';
+import CategoryLimit from './models/CategoryLimit.js';
 
 import uploadRoutes from "./routes/uploadRoutes.js";
 import submittedTaskRoutes from './routes/SubmittedTaskRoutes.js';
@@ -92,6 +93,24 @@ async function seedChandulaAdmin() {
   }
 }
 
+// ✅ Seed default energy category limits
+async function seedCategoryLimits() {
+  const defaultLimits = [
+    { category: 'HVAC', maxConsumptionLimit: 3500 },
+    { category: 'Lighting', maxConsumptionLimit: 1500 },
+    { category: 'Renewable', maxConsumptionLimit: 800 },
+    { category: 'Other', maxConsumptionLimit: 1000 },
+  ];
+
+  for (const limit of defaultLimits) {
+    const existing = await CategoryLimit.findOne({ category: limit.category });
+    if (!existing) {
+      await CategoryLimit.create(limit);
+      console.log(`✅ Seeded category limit: ${limit.category} (${limit.maxConsumptionLimit} kWh)`);
+    }
+  }
+}
+
 // 🚀 Start Server
 async function startServer() {
 
@@ -101,6 +120,7 @@ async function startServer() {
     
     await seedAdmin();         // .env admin
     await seedChandulaAdmin(); // chandula@example.com admin
+    await seedCategoryLimits(); // Energy category limits
 
     // Initialize email service
     initializeEmailService();
