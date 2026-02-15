@@ -6,6 +6,14 @@
 
 ---
 
+## 🔄 Project Status
+
+This repository represents a **revamped and enhanced version** of the original Facility Aura project. The revamp includes architectural improvements, code refactoring, enhanced features, and optimized performance to meet modern development standards.
+
+**Original Repository**: [Facility_Aura_FM-Software-for-a-Commercial-Building](https://github.com/bineth25/Facility_Aura_FM-Software-for-a-Commercial-Building-)
+
+---
+
 ## Technology Stack
 
 - **Frontend**: React with Vite, JavaScript, CSS, HTML
