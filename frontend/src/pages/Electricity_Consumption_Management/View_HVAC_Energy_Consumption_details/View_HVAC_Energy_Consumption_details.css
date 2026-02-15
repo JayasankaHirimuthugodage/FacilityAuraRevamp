@@ -1,0 +1,165 @@
+.hvac_energy-consumption-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.hvac_energy-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.hvac_energy-filters {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hvac_energy-filters label {
+  font-weight: bold;
+}
+
+.hvac_energy-filters select {
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.hvac_energy-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.hvac_energy-table th,
+.hvac_energy-table td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+
+.hvac_energy-header-row {
+  background: linear-gradient(to right, #4CAF50, #81C784);
+  color: white;
+  font-size: 1rem;
+}
+
+.hvac_energy-exceeded {
+  color: red;
+  font-weight: bold;
+}
+
+.hvac_energy-normal {
+  color: green;
+  font-weight: normal;
+}
+
+.hvac_energy-no-data-message {
+  color: #ff6f61;
+  font-size: 1.2em;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.hvac_energy-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  font-family: Arial, sans-serif;
+}
+
+.hvac_energy-modal {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 6px;
+  width: 450px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+}
+
+.hvac_energy-modal h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.hvac_energy-modal form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 10px;
+  align-items: center;
+}
+
+.hvac_energy-modal label {
+  text-align: right;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.hvac_energy-modal input,
+.hvac_energy-modal select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.hvac_energy-button-container {
+  display: flex;
+  justify-content: flex-end;
+  grid-column: 1 / span 2;
+  margin-top: 20px;
+}
+
+.hvac_energy-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #4CAF50;
+  color: white;
+  margin-left: 10px;
+}
+
+.hvac_energy-button.cancel {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+
+
+
+.hvac_energy-edit-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #2196F3; 
+  color: white;
+  margin-left: 10px;
+}
+
+
+.hvac_energy-delete-button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  background-color: #f44336; 
+  color: white;
+  margin-left: 10px;
+}

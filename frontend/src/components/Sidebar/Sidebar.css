@@ -1,0 +1,96 @@
+.sidebar {
+  width: 270px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ffffff, #3b82f6);
+  padding: 10px;
+  color: rgb(22, 19, 19);
+  flex-shrink: 0;
+  overflow-y: auto;
+  
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 45px;
+  height: 45px;
+}
+
+.sidebar-header h3 {
+  font-size: 26px;
+  margin-left: 10px;
+  margin-top:6px ;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+.menu-title {
+  font-size: 18px;
+  font-weight: bold;
+  color:  #070808;
+  margin-bottom: 25px;
+}
+
+.menu-item {
+  padding: 12px 15px;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #2563eb, #1e40af);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+
+}
+
+.menu-item:hover {
+  background: #1e40af;
+  transform: translateX(5px);
+
+}
+
+.dropdown .arrow {
+  font-size: 12px;
+}
+
+.submenu {
+  padding-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.submenu-item {
+  display: block;
+  padding: 10px 15px;
+  margin: 6px 0;
+  background: linear-gradient(to bottom, #dbeafe, #eff6ff);
+  border-radius: 8px;
+  font-size: 14px;
+  color: #100e0e;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.submenu-item:hover {
+  background: #bfdbfe;
+  color: #1e40af;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.sidebar-responsive {
+  display: inline !important;
+  position: absolute;
+  z-index: 12 !important;
+}
