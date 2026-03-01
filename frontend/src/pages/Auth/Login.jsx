@@ -19,11 +19,11 @@ export default function Login() {
     if (e) e.preventDefault()
     setIsLoading(true)
     setError('')
-    
+
     try {
       // Call the actual login service
       let user = await login(email, password)
-      
+
       // Map role "user" → "ms"
       if (user.role === 'user') {
         user.role = 'ms'
@@ -33,10 +33,10 @@ export default function Login() {
       // Extract technician ID from email (e.g., pl001@gmail.com -> PL001)
       const emailPrefix = email.split('@')[0]
       const technicianId = emailPrefix.toUpperCase()
-      
+
       // Add technician ID to user data
       user.technicianId = technicianId
-      
+
       // Store in localStorage
       localStorage.setItem('fm_user', JSON.stringify(user))
 
@@ -65,36 +65,31 @@ export default function Login() {
         <div className="bg-circle top-right"></div>
         <div className="bg-circle bottom-left"></div>
       </div>
-      
+
       {/* Left Side - Image/Testimonial */}
       <div className="left-side">
         <div className="testimonial-content">
           <div className="testimonial-quote">
             "Streamlined facility management with enterprise-grade reliability and precision."
           </div>
-          <div className="testimonial-author">Michael Chen</div>
-          <div className="testimonial-role">Senior Facilities Manager</div>
+
         </div>
       </div>
-      
+
       {/* Right Side - Login Form */}
       <div className="right-side">
         <div className="login-wrapper">
           {/* Logo and Branding */}
           <div className="logo-container">
             <div className="logo">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#1e40af"/>
-                <path d="M2 17L12 22L22 17" stroke="#1e40af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 12L12 17L22 12" stroke="#1e40af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <img src="/favicon.png" alt="FacilityAura Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
             </div>
             <div>
               <div className="logo-text">FacilityAura</div>
               <div className="logo-subtitle">Facility Management System</div>
             </div>
           </div>
-          
+
           <div className="login-card">
             <div className="card-body">
               {error && (
@@ -102,7 +97,7 @@ export default function Login() {
                   <p>{error}</p>
                 </div>
               )}
-              
+
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email Address</label>
@@ -117,7 +112,7 @@ export default function Login() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <div className="input-container">
@@ -148,7 +143,7 @@ export default function Login() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="form-group">
                   <button
                     type="submit"
@@ -171,7 +166,7 @@ export default function Login() {
               </form>
             </div>
           </div>
-          
+
           <footer className="login-footer">
             <p>© 2025 FacilityAura. All rights reserved.</p>
           </footer>

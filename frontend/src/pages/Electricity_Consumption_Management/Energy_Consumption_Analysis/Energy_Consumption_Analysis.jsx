@@ -24,7 +24,7 @@ const Energy_Consumption_Analysis = () => {
     useEffect(() => {
         // Reset the energy data when filters change
         setEnergyData([]);
-        
+
         // Fetch the new data if all filters are set
         if (year && month && category) fetchEnergyData();
     }, [year, month, category]);
@@ -45,8 +45,8 @@ const Energy_Consumption_Analysis = () => {
         }
     };
 
-    // Process data to include all floors with proper ordering
-    const floors = Array.from({ length: 7 }, (_, i) => i + 1); 
+    // Only show floors that have actual data, sorted ascending
+    const floors = energyData.map(d => d.floor).sort((a, b) => a - b);
     const processedData = floors.map(floor => {
         const floorData = energyData.find(d => d.floor === floor);
         return {
@@ -60,14 +60,14 @@ const Energy_Consumption_Analysis = () => {
         datasets: [{
             label: 'Energy Consumption',
             data: processedData.map(d => d.reading),
-            backgroundColor: processedData.map(d => 
-                d.isExceeded ? 'rgba(239, 83, 80, 0.85)' : 'rgba(38, 166, 154, 0.85)'
+            backgroundColor: processedData.map(d =>
+                d.isExceeded ? 'rgba(239, 83, 80, 0.85)' : 'rgba(37, 99, 235, 0.85)'
             ),
             borderColor: 'rgba(0, 0, 0, 0.1)',
             borderWidth: 1,
             borderRadius: 6,
-            hoverBackgroundColor: processedData.map(d => 
-                d.isExceeded ? 'rgba(239, 83, 80, 1)' : 'rgba(38, 166, 154, 1)'
+            hoverBackgroundColor: processedData.map(d =>
+                d.isExceeded ? 'rgba(239, 83, 80, 1)' : 'rgba(37, 99, 235, 1)'
             ),
         }]
     };
@@ -134,10 +134,10 @@ const Energy_Consumption_Analysis = () => {
             const response = await axios.get('http://localhost:4000/api/energyReadings/avg', {
                 params: { year, category }
             });
-    
+
             // Sort the response data by floor number ascending
             const sortedData = response.data.sort((a, b) => a.floor - b.floor);
-    
+
             // Compressed data for the URL parameter
             const reportData = {
                 c: category, // category
@@ -148,69 +148,69 @@ const Energy_Consumption_Analysis = () => {
                     e: f.exceeded ? 1 : 0           // exceeded flag
                 }))
             };
-            
+
             const viewerUrl = `https://jayasankahirimuthugodage.github.io/energy-report-viewer/?data=${encodeURIComponent(JSON.stringify(reportData))}`;
-    
+
             // Create a simple text summary version
-            const textVersion = sortedData.map(floor => 
+            const textVersion = sortedData.map(floor =>
                 `Floor ${floor.floor}: ${floor.averageReading.toFixed(2)} kWh${floor.exceeded ? ' (Exceeded)' : ''}`
             ).join('\n');
-    
+
             // Combine both into the QR code data
             const qrContent = `🔵 View as Web: ${viewerUrl}\n🟢 View as Text:\n${textVersion}`;
-    
+
             // Set the combined data into QR
             setQrData(qrContent);
-    
+
         } catch (error) {
             console.error('Error fetching avg consumption data:', error);
         } finally {
             setLoading(false);
         }
     };
-    
+
     const closeModal = () => {
         setIsModalOpen(false);
     };
 
     const generatePDF = async () => {
         if (!year || !category) return;
-    
+
         try {
             const response = await axios.get('http://localhost:4000/api/energyReadings/avg', {
                 params: { year, category }
             });
-    
+
             const doc = new jsPDF();
-    
+
             doc.setFontSize(16);
             doc.text(`Energy Consumption Report`, 14, 20);
             doc.setFontSize(12);
             doc.text(`Year: ${year}`, 14, 30);
             doc.text(`Category: ${category}`, 14, 38);
-    
+
             // Sort the response data by floor number before creating table rows
             const sortedData = response.data.sort((a, b) => a.floor - b.floor);
-    
+
             const tableRows = sortedData.map((floorData, index) => [
                 index + 1,
                 `Floor ${floorData.floor}`,
                 `${floorData.averageReading.toFixed(2)} kWh`,
                 floorData.exceeded ? 'Yes' : 'No'
             ]);
-    
+
             autoTable(doc, {
                 head: [['#', 'Floor', 'Avg. Consumption', 'Exceeded Limit']],
                 body: tableRows,
                 startY: 45,
             });
-    
+
             doc.save(`Energy_Report_${category}_${year}.pdf`);
         } catch (error) {
             console.error('Error generating PDF:', error);
         }
     };
-    
+
 
     return (
         <div className={styles.eca_container}>
@@ -225,7 +225,7 @@ const Energy_Consumption_Analysis = () => {
                         <div className={styles.eca_filter_group}>
                             <div className={styles.eca_filter_item}>
                                 <label className={styles.eca_filter_label} htmlFor="year-select">Year</label>
-                                <select 
+                                <select
                                     id="year-select"
                                     value={year}
                                     onChange={(e) => setYear(e.target.value)}
@@ -240,7 +240,7 @@ const Energy_Consumption_Analysis = () => {
 
                             <div className={styles.eca_filter_item}>
                                 <label className={styles.eca_filter_label} htmlFor="month-select">Month</label>
-                                <select 
+                                <select
                                     id="month-select"
                                     value={month}
                                     onChange={(e) => setMonth(e.target.value)}
@@ -255,7 +255,7 @@ const Energy_Consumption_Analysis = () => {
 
                             <div className={styles.eca_filter_item}>
                                 <label className={styles.eca_filter_label} htmlFor="category-select">Category</label>
-                                <select 
+                                <select
                                     id="category-select"
                                     value={category}
                                     onChange={(e) => setCategory(e.target.value)}
@@ -309,8 +309,8 @@ const Energy_Consumption_Analysis = () => {
                                 </svg>
                                 Generate PDF Report
                             </button>
-                            
-                            <button 
+
+                            <button
                                 onClick={(e) => {
                                     e.preventDefault();
                                     fetchAvgConsumptionData();
@@ -340,20 +340,20 @@ const Energy_Consumption_Analysis = () => {
                         </div>
                     ) : energyData.length > 0 ? (
                         <div className={`${styles.eca_card} ${styles.eca_chart_container}`}>
-                            <Bar 
+                            <Bar
                                 key={`${year}-${month}-${category}`}
-                                data={chartData} 
-                                options={chartOptions} 
+                                data={chartData}
+                                options={chartOptions}
                             />
                             <div className={styles.eca_legend}>
-                              <div className={styles.eca_legend_item}>
-                                <span className={`${styles.eca_legend_color} ${styles.eca_normal}`}></span>
-                                <span className={styles.eca_legend_text}>Normal Consumption (Below Limit)</span>
-                              </div>
-                              <div className={styles.eca_legend_item}>
-                                <span className={`${styles.eca_legend_color} ${styles.eca_exceeded}`}></span>
-                                <span className={styles.eca_legend_text}>Exceeded Consumption Limit</span>
-                              </div>
+                                <div className={styles.eca_legend_item}>
+                                    <span className={`${styles.eca_legend_color} ${styles.eca_normal}`}></span>
+                                    <span className={styles.eca_legend_text}>Normal Consumption (Below Limit)</span>
+                                </div>
+                                <div className={styles.eca_legend_item}>
+                                    <span className={`${styles.eca_legend_color} ${styles.eca_exceeded}`}></span>
+                                    <span className={styles.eca_legend_text}>Exceeded Consumption Limit</span>
+                                </div>
                             </div>
                         </div>
                     ) : (
@@ -371,7 +371,7 @@ const Energy_Consumption_Analysis = () => {
                     )}
                 </div>
             </div>
-            
+
             {/* Modal with QR Code */}
             {isModalOpen && (
                 <div className={styles.eca_modal_overlay}>

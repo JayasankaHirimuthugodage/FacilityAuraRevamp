@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 
 const Sidebar = () => {
-  const [openMenu, setOpenMenu] = useState(null); 
+  const [openMenu, setOpenMenu] = useState(null);
 
   const toggleDropdown = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -12,7 +12,7 @@ const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
-        <img src="/favicon.ico" alt="Logo" className="logo" />
+        <img src="/favicon.png" alt="Logo" className="logo" />
         <h3>FacilityAura</h3>
       </div>
 
@@ -30,10 +30,10 @@ const Sidebar = () => {
       </div>
       {openMenu === "taskDashboard" && (
         <div className="submenu">
-        <NavLink to="/Dashboard" className="submenu-item">Dashboard</NavLink>
-        <NavLink to="/Tasks" className="submenu-item">Tasks</NavLink>
-        <NavLink to="/Done" className="submenu-item">Done</NavLink>
-      </div>
+          <NavLink to="/Dashboard" className="submenu-item">Dashboard</NavLink>
+          <NavLink to="/Tasks" className="submenu-item">Tasks</NavLink>
+          <NavLink to="/Done" className="submenu-item">Done</NavLink>
+        </div>
       )}
 
       {/* Electricity Consumption Management */}

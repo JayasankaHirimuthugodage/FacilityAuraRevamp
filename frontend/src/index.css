@@ -9,13 +9,13 @@ body {
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .app-container {
   display: flex;
   height: 100vh;
-  overflow: auto; 
+  overflow: auto;
 }
 
 .sidebar {
@@ -25,7 +25,7 @@ body {
   padding: 10px;
   color: rgb(22, 19, 19);
   flex-shrink: 0;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .main-content {
@@ -40,9 +40,9 @@ body {
 .dashboard-content {
   flex-grow: 1;
   padding: 15px;
-  background-color: #effdf8;
+  background-color: #f0f4f8;
   overflow-y: auto;
-  height: calc(100vh - 50px); 
+  height: calc(100vh - 50px);
 }
 
 /* Footer (if exists) */
@@ -73,6 +73,7 @@ body {
   }
 
   .main-content {
-    padding-left: 0; /* Prevents unnecessary margin */
+    padding-left: 0;
+    /* Prevents unnecessary margin */
   }
 }

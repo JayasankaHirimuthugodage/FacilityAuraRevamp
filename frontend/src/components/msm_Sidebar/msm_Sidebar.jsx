@@ -4,24 +4,24 @@ import "./msm_Sidebar.css";
 
 const Sidebar = () => {
   const [openMenu, setOpenMenu] = useState("taskDashboard"); // Start with menu open
-  
+
   const toggleDropdown = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu); // If already open, close it; otherwise, open it
   };
-  
+
   return (
     <aside className="msm_sidebar">
       <div className="msm_sidebar_header">
-        <img src="../public/favicon.ico" alt="Logo" className="msm_logo" />
+        <img src="/favicon.png" alt="Logo" className="msm_logo" />
         <h3 className="msm_appTitle">FacilityAura</h3>
       </div>
-      
+
       <div className="msm_sidebar_divider"></div>
-      
+
       <h4 className="msm_menu_title">MENU</h4>
-      
+
       {/* Your Details Dashboard */}
-      <div 
+      <div
         className={`msm_menu_item msm_dropdown ${openMenu === "taskDashboard" ? "msm_menu_item_active" : ""}`}
         onClick={() => toggleDropdown("taskDashboard")}
       >
@@ -40,10 +40,10 @@ const Sidebar = () => {
           </svg>
         </span>
       </div>
-      
+
       {openMenu === "taskDashboard" && (
         <div className="msm_submenu">
-          <NavLink to="/Dashboard" className={({isActive}) => 
+          <NavLink to="/Dashboard" className={({ isActive }) =>
             isActive ? "msm_submenu_item msm_submenu_item_active" : "msm_submenu_item"
           }>
             <span className="msm_submenu_icon">
@@ -56,7 +56,7 @@ const Sidebar = () => {
             </span>
             Dashboard
           </NavLink>
-          <NavLink to="/Tasks" className={({isActive}) => 
+          <NavLink to="/Tasks" className={({ isActive }) =>
             isActive ? "msm_submenu_item msm_submenu_item_active" : "msm_submenu_item"
           }>
             <span className="msm_submenu_icon">
@@ -67,7 +67,7 @@ const Sidebar = () => {
             </span>
             Tasks
           </NavLink>
-          <NavLink to="/Complete" className={({isActive}) => 
+          <NavLink to="/Complete" className={({ isActive }) =>
             isActive ? "msm_submenu_item msm_submenu_item_active" : "msm_submenu_item"
           }>
             <span className="msm_submenu_icon">
@@ -79,9 +79,9 @@ const Sidebar = () => {
           </NavLink>
         </div>
       )}
-      
+
       {/* You can add more menu items here following the same pattern */}
-      
+
       <div className="msm_sidebar_footer">
         <p className="msm_copyright">© 2025 OfficeAura</p>
       </div>
